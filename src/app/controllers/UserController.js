@@ -1,4 +1,5 @@
 import User from '../models/User';
+import File from '../models/File';
 
 class UserController {
   async store(req, res) {
@@ -31,25 +32,30 @@ class UserController {
 
 async index(req, res) {
   const user = await User.findOne({
-    where: { id: req.userId}
+    where: { id: req.userId },
+    attributes: [
+      'id', 
+      'name', 
+      'email',
+      'portfolio',
+      'area',
+      'experience',
+      'skills', 
+      'avatar_id'],
+    include: [{
+      model: File,
+      as: 'avatar',
+      attributes: ['name', 'path', 'url'],
+    }],
+    
   });
 
   if(!user) {
     return res.status(401).json({ error: 'Usuário não encontrado'});
   }
 
-  const {id, name, email, portfolio, area, experience, skills, tags } = user;
 
-  return res.json({
-      id, 
-      name, 
-      email, 
-      portfolio, 
-      area, 
-      experience, 
-      skills, 
-      tags  
-  });
+  return res.json(user);
 }
 
   async update(req, res) {
@@ -75,7 +81,17 @@ async index(req, res) {
   }
   }
 
-  const { id, name, portfolio, area, experience, skills, tags  } = await user.update(req.body);
+  await user.update(req.body);
+
+  const { id, name, portfolio, area, experience, skills, tags, avatar  } = await User.findByPk(req.userId, {
+    include: [
+      {
+        model: File,
+        as: 'avatar',
+        attributes: ['id', 'path', 'url'], 
+      }
+    ]
+  })
 
   return res.json({
     id,
@@ -85,7 +101,8 @@ async index(req, res) {
     area, 
     experience, 
     skills, 
-    tags
+    tags,
+    avatar
   });
 }
 
