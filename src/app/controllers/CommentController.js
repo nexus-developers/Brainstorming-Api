@@ -1,4 +1,5 @@
 const Comment = require('../models/Comment');
+const User = require('../models/User');
 
 class CommentController {
   async store(req, res) {
@@ -34,7 +35,12 @@ class CommentController {
     const { id } = req.params;
 
     const comment = await Comment.findAll({
-      where: { post_id: id }
+      where: { post_id: id },
+      include: [{
+        model: User,
+        as: 'user',
+        attributes: ['name'],
+      }],
     })
 
     if(!comment) {
