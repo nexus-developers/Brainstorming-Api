@@ -29,6 +29,8 @@ class CommentController {
    
     return res.json(comment);
   }
+
+
 }
 
 module.exports = new CommentController();
