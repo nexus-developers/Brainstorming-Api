@@ -1,12 +1,11 @@
-import Sequelize from 'sequelize';
+const Sequelize = require('sequelize');
 
+const databaseConfig = require('../config/database');
 
-import databaseConfig from '../config/database';
-
-import User from '../app/models/User';
-import Post from '../app/models/Post';
-import Comment from '../app/models/Comment';
-import File from '../app/models/File';
+const User = require('../app/models/User');
+const Post = require('../app/models/Post');
+const Comment = require('../app/models/Comment');
+const File = require('../app/models/File');
 
 const connection = new Sequelize(databaseConfig);
 

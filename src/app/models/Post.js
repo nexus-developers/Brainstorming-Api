@@ -1,6 +1,6 @@
-import Sequelize, { Model } from 'sequelize';
+const Sequelize = require('sequelize');
 
-class Post extends Model {
+class Post extends Sequelize.Model {
   static init(sequelize) {
     super.init({
       title: Sequelize.STRING,
@@ -16,4 +16,4 @@ class Post extends Model {
   }
 }
 
-export default Post;
+module.exports = Post;

@@ -1,6 +1,6 @@
-import Sequelize, { Model } from 'sequelize';
+const Sequelize = require('sequelize');
 
-class File extends Model {
+class File extends Sequelize.Model {
   static init(sequelize) {
     super.init(
       {
@@ -19,4 +19,4 @@ class File extends Model {
   }
 }
 
-export default File;
+module.exports = File;

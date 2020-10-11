@@ -1,5 +1,5 @@
-import User from '../models/User';
-import File from '../models/File';
+const User = require('../models/User');
+const File = require('../models/File');
 
 class UserController {
   async store(req, res) {
@@ -109,4 +109,4 @@ async index(req, res) {
 
 }
 
-export default new UserController();
+module.exports = new UserController();

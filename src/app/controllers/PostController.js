@@ -1,5 +1,5 @@
-import Post from '../models/Post';
-import User from '../models/User';
+const Post = require('../models/Post');
+const User = require('../models/User');
 
 class PostController {
   async store(req, res) {
@@ -95,4 +95,4 @@ class PostController {
   }
 }
 
-export default new PostController();
+module.exports = new PostController();

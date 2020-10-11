@@ -1,4 +1,4 @@
-import Comment from '../models/Comment';
+const Comment = require('../models/Comment');
 
 class CommentController {
   async store(req, res) {
@@ -31,4 +31,4 @@ class CommentController {
   }
 }
 
-export default new CommentController();
+module.exports = new CommentController();

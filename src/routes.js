@@ -1,14 +1,14 @@
-import { Router } from 'express';
-import multer from 'multer';
-import multerConfig from './config/multer';
+const { Router } = require('express');
+const multer = require('multer');
+const multerConfig = require('./config/multer');
 
-import UserController from './app/controllers/UserController';
-import SessionController from './app/controllers/SessionController';
-import PostController from './app/controllers/PostController';
-import CommentController from './app/controllers/CommentController';
-import FileController from './app/controllers/FileController';
+const UserController = require('./app/controllers/UserController');
+const SessionController = require('./app/controllers/SessionController');
+const PostController = require('./app/controllers/PostController');
+const CommentController = require('./app/controllers/CommentController');
+const FileController = require('./app/controllers/FileController');
 
-import authMiddleware from './app/middlewares/auth';
+const authMiddleware = require('./app/middlewares/auth');
 
 const routes = new Router();
 const upload = multer(multerConfig);
@@ -28,4 +28,4 @@ routes.put('/post/:id', authMiddleware, PostController.update);
 routes.post('/files', authMiddleware, upload.single('file'), FileController.store)
 
 
-export default routes;
+module.exports = routes;
