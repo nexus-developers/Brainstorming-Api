@@ -106,6 +106,36 @@ async index(req, res) {
   });
 }
 
+async getById(req, res) {
+  const { id } = req.params;
+
+  const user = await User.findOne({
+    where: { id: id },
+    attributes: [
+      'id', 
+      'name', 
+      'email',
+      'portfolio',
+      'area',
+      'experience',
+      'skills', 
+      'avatar_id'],
+    include: [{
+      model: File,
+      as: 'avatar',
+      attributes: ['name', 'path', 'url'],
+    }],
+    
+  });
+
+  if(!user) {
+    return res.status(401).json({ error: 'Usuário não encontrado'});
+  }
+
+  return res.json(user);
+
+}
+
 
 }
 

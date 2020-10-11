@@ -21,6 +21,7 @@ routes.get('/comment', authMiddleware, CommentController.index);
 routes.get('/comment/:id', authMiddleware, CommentController.getComments);
 routes.put('/users', authMiddleware ,UserController.update);
 routes.get('/users', authMiddleware, UserController.index);
+routes.get('/users/:id', UserController.getById);
 routes.get('/post', authMiddleware, PostController.index);
 routes.get('/post/:id', authMiddleware, PostController.findOne);
 routes.get('/post-findAll', PostController.findAll);
