@@ -30,6 +30,20 @@ class CommentController {
     return res.json(comment);
   }
 
+  async getComments(req, res) {
+    const { id } = req.params;
+
+    const comment = await Comment.findAll({
+      where: { post_id: id }
+    })
+
+    if(!comment) {
+      return res.status(401).json({ error: 'Não encontramos comentários desse usuário'});
+    }
+    
+      return res.json(comment);
+
+  }
 
 }
 
